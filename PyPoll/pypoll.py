@@ -1,7 +1,6 @@
 import os
 import csv
 
-#initialize variables
 candidates = []
 count = 0
 vote_counts = []
@@ -38,7 +37,7 @@ for countcandidates in range(len(candidates)):
     vote_percentage = vote_counts[countcandidates]/(count*100)
     percentages.append(vote_percentage)
 
-    if vote_counts[count] > max_votes:
+    if vote_counts[countcandidates] > max_votes:
         max_votes = vote_counts[countcandidates]
         print(max_votes)
         max_index = countcandidates
@@ -46,25 +45,16 @@ winner = candidates[max_index]
 
 
 print(f"Total Votes: {count}")
-for count in range(len(candidates)):
+for countcandidates in range(len(candidates)):
     print(f"{candidates[countcandidates]}: {percentages[countcandidates]}% ({vote_counts[countcandidates]})")
 print("---------------------------")
 print(f"Winner: {winner}")
 print("---------------------------")
-
 write_file = f"pypoll_Result.txt"
-
-
 filewriter = open(write_file, mode = 'w')
-
-
-
 filewriter.write("Election Results\n")
 filewriter.write(f"Total Votes: {count}\n")
-for count in range(len(candidates)):
+for countcandidates in range(len(candidates)):
     filewriter.write(f"{candidates[countcandidates]}: {percentages[countcandidates]}% ({vote_counts[countcandidates]})\n")
 
-
-
-#close file
 filewriter.close()
