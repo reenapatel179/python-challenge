@@ -1,0 +1,207 @@
+# # Modify this code to update the DB schema diagram.
+# # To reset the sample schema, replace everything with
+# # two dots ('..' - without quotes).
+
+# Customer
+# -
+# CustomerID PK int
+# Name string INDEX
+# Address1 string
+# Address2 NULL string
+# Address3 NULL string
+
+# Order
+# -
+# OrderID PK int
+# CustomerID int FK >- Customer.CustomerID
+# TotalAmount money
+# OrderStatusID int FK >- os.OrderStatusID
+
+# OrderLine as ol
+# ----
+# OrderLineID PK int
+# OrderID int FK >- Order.OrderID
+# ProductID int FK >- p.ProductID
+# Quantity int
+
+# # Table documentation comment 1 (try the PDF/RTF export)
+# Product as p # Table documentation comment 2
+# ------------
+# ProductID PK int
+# # Field documentation comment 1
+# # Field documentation comment 2 
+# Name varchar(200) UNIQUE # Field documentation comment 3
+# Price money
+
+# OrderStatus as os
+# ----
+# OrderStatusID PK int
+# Name UNIQUE string
+
+
+answer_scores
+-
+id varchar 
+score integer
+
+answers
+-
+answers_id varchar
+answers_author_id varchar
+answers_question_id varchar
+answers_date_added varchar
+answers_body varchar
+
+comments
+-
+comments_id varchar
+comments_author_id varchar
+comments_parent_content_id varchar
+comments_date_added varchar
+comments_body varchar
+
+emails
+-
+emails_id varchar
+emails_recipient_id varchar
+emails_date_sent varchar
+emails_frequency_level varchar
+
+
+group_memberships
+-
+group_memberships_group_id varchar
+group_memberships_user_id varchar
+
+
+groups
+-
+groups_id varchar
+groups_group_typevarchar
+
+matches
+-
+matches_email_id varchar
+matches_question_id varchar
+
+
+professionals
+-
+professionals_id varchar
+professionals_location varchar
+professionals_industry varchar
+professionals_headline varchar
+professionals_date_joined varchar
+
+
+question_scores
+-
+id varchar
+score varchar
+
+questions
+-
+questions_id varchar
+questions_author_id varchar
+questions_date_added varchar
+questions_title varchar
+questions_body varchar
+
+school_memberships
+-
+school_memberships_school_id varchar
+school_memberships_user_id varchar
+
+students
+-
+students_id varchar
+students_location varchar
+students_date_joined varchar
+
+tag_questions
+-
+tag_questions_tag_id varchar
+tag_questions_question_id varchar
+
+tag_users
+-
+tag_users_tag_id varchar
+tag_users_user_id varchar
+
+tags
+-
+tags_tag_id varchar
+tags_tag_name varchar
+---------------------
+
+
+answers
+-
+answers_id PK varchar
+answers_author_id varchar FK >- professionals.professionals_id
+answers_question_id varchar FK >- questions.questions_id
+answers_date_added datetime
+answers_body string
+
+comments
+-
+comments_id PK varchar
+comments_author_id varchar
+comments_parent_content_id varchar
+comments_date_added datetime
+comments_body varchar
+
+emails
+-
+emails_id PK varchar
+emails_recipient_id varchar
+emails_date_sent datetime
+emails_frequency_level varchar
+
+
+group_memberships
+-
+group_memberships_group_id varchar FK >- groups.groups_id
+group_memberships_user_id varchar 
+
+
+groups
+-
+groups_id PK varchar
+groups_group_type varchar
+
+matches
+-
+matches_email_id varchar FK >- emails.emails_id
+matches_question_id varchar FK >- questions.questions_id
+
+
+professionals
+-
+professionals_id PK varchar
+professionals_location varchar
+professionals_industry varchar
+professionals_headline varchar
+professionals_date_joined datetime
+
+
+
+
+questions
+-
+questions_id PK varchar
+questions_author_id varchar FK >- students.students_id
+questions_date_added Date
+questions_title varchar
+questions_body string
+
+school_memberships
+-
+school_memberships_school_id varchar
+school_memberships_user_id varchar
+
+students
+-
+students_id PK varchar
+students_location varchar
+students_date_joined varchar
